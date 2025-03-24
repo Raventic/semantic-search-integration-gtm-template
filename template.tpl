@@ -467,6 +467,24 @@ ___TEMPLATE_PARAMETERS___
             "type": "NON_EMPTY"
           }
         ]
+      },
+      {
+        "type": "TEXT",
+        "name": "showAllMessage",
+        "displayName": "Show all message at the bottom of the widget",
+        "simpleValueType": true,
+        "valueValidators": [
+          {
+            "type": "NON_EMPTY"
+          }
+        ],
+        "enablingConditions": [
+          {
+            "paramName": "widget",
+            "paramValue": "dropdown",
+            "type": "EQUALS"
+          }
+        ]
       }
     ]
   },
@@ -1098,7 +1116,9 @@ const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
       
       content: data.additionalContentItems,
       
-      cartConfig: cartConfig()
+      cartConfig: cartConfig(),
+      
+      showAllMessage: data.showAllMessage
     },
     (instanceId) => {
       dataLayerPush({
@@ -1117,10 +1137,8 @@ const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
           raventic: {
             search: {
               instanceId: instanceId,
-              click: {
-                product: product,
-                source: source  
-              }, 
+              clickedProduct: product,
+              source: source
             },
            },
         });
@@ -1130,10 +1148,8 @@ const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
           raventic: {
             search: {
               instanceId: instanceId,
-              click: {
-                product: product,
-                source: source  
-              },              
+              clickedProduct: product,
+              source: source
             },
            },
         });
@@ -1208,17 +1224,15 @@ const initResultsWidget = (dataLayerPush, raventicLayerPush) => {
         },
       });
     },
-    (product, instanceId, action, source) => {
+    (product, instanceId, action) => {
       if (action == "add-to-cart") {
         dataLayerPush({
           event: "RaventicSearchResultsWidgetAddToCart",
           raventic: {
             search: {
               instanceId: instanceId,
-              click: {
-                product: product,
-                source: source  
-              }, 
+              clickedProduct: product,
+              source: "search"
             },
            },
         });
@@ -1228,10 +1242,8 @@ const initResultsWidget = (dataLayerPush, raventicLayerPush) => {
           raventic: {
             search: {
               instanceId: instanceId,
-              click: {
-                product: product,
-                source: source  
-              },              
+              clickedProduct: product,
+              source: "search"
             },
            },
         });

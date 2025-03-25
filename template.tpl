@@ -541,13 +541,6 @@ ___TEMPLATE_PARAMETERS___
         "name": "customPageStyles",
         "displayName": "Custom page styles",
         "simpleValueType": true,
-        "enablingConditions": [
-          {
-            "paramName": "widget",
-            "paramValue": "dropdown",
-            "type": "EQUALS"
-          }
-        ],
         "lineCount": 15
       },
       {
@@ -1184,6 +1177,7 @@ const initResultsWidget = (dataLayerPush, raventicLayerPush) => {
 
       disableDefaultStyles: !!data.disableDefaultStyles,
       customStyles: data.customStyles ? data.customStyles : undefined,
+      customPageStyles: data.customPageStyles ? data.customPageStyles : undefined,
 
       thumbnailDimensions: data.thumbnailCustomSize && data.thumbnailWidth && data.thumbnailHeight ? {
         width: makeInteger(data.thumbnailWidth),

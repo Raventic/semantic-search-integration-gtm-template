@@ -993,6 +993,26 @@ ___TEMPLATE_PARAMETERS___
         "type": "EQUALS"
       }
     ]
+  },
+  {
+    "type": "GROUP",
+    "name": "testing",
+    "displayName": "Testing",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "LABEL",
+        "name": "testingModeExplanation",
+        "displayName": "When testing mode is turned on, 50 % of your visitors will see the Recommendation Carousel and 50 % won\u0027t. Every time the Carosel tag is triggered, it will send an event called RaventicRCECarouselTest containing the information if the current visitor will see the carousel or not. You can use it to configure sending an event into your GA so that you are able to compare the performance of visitors who are seeing Recommendation carousels and those who aren\u0027t."
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "testingMode",
+        "checkboxText": "Testing mode",
+        "simpleValueType": true,
+        "alwaysInSummary": true
+      }
+    ]
   }
 ]
 

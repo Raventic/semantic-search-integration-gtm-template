@@ -1,6 +1,8 @@
 homepage: "https://www.raventic.com"
 documentation: "https://doc.raventic.dev/semantic-search/"
 versions:
+    - sha: e3169f0267cf47b10487aa169b61d5c3a8ff688a
+      changeNotes: A/B testing support
     - sha: d66ec028059c5da77e480fbf17d9474fee7a294f
       changeNotes: Small fixes
     - sha: dda38e3fbf7fb2951d55f930df29c2d5647eb27e

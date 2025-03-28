@@ -1028,7 +1028,7 @@ const makeString = require('makeString');
 const makeTableMap = require('makeTableMap');
 const encodeUri = require('encodeUri');
 
-const version = "20250321001";
+const version = "20250328001";
 
 const initWidget = () => {
   const dataLayerPush = createQueue('dataLayer');
@@ -1054,7 +1054,8 @@ const initWidget = () => {
       event: "RaventicSearchIntegrationTest",
       raventic: {
         search: {},
-        raventic_variant: variant
+        raventic_variant: variant,
+        raventic_widget: "search_" + data.widget
       },
     });
 

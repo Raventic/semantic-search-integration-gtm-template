@@ -431,6 +431,24 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "TEXT",
+        "name": "noQueryTitle",
+        "displayName": "Title of the results widget when no query is active.",
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "widget",
+            "paramValue": "results",
+            "type": "EQUALS"
+          }
+        ],
+        "valueValidators": [
+          {
+            "type": "NON_EMPTY"
+          }
+        ]
+      },
+      {
+        "type": "TEXT",
         "name": "categoriesTitle",
         "displayName": "Categories filter title",
         "simpleValueType": true,
@@ -1204,6 +1222,7 @@ const initResultsWidget = (dataLayerPush, raventicLayerPush) => {
       desktopMode: data.desktopMode,
 
       titlePattern: data.titlePattern,
+      noQueryTitle: data.noQueryTitle,
 
       noResultsFoundMessage: data.noResultsFoundMessage ? data.noResultsFoundMessage : undefined,
 

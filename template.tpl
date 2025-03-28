@@ -133,6 +133,88 @@ ___TEMPLATE_PARAMETERS___
     ]
   },
   {
+    "type": "GROUP",
+    "name": "functional",
+    "displayName": "Functional configuration",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "TEXT",
+        "name": "inputSubmitUrl",
+        "displayName": "URL to redirect when pressing Enter in the widget input",
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "widget",
+            "paramValue": "dropdown",
+            "type": "EQUALS"
+          }
+        ],
+        "valueValidators": [
+          {
+            "type": "NON_EMPTY"
+          }
+        ]
+      },
+      {
+        "type": "TEXT",
+        "name": "queryParameterName",
+        "displayName": "URL parameter containing the query",
+        "simpleValueType": true,
+        "valueValidators": [
+          {
+            "type": "NON_EMPTY"
+          }
+        ]
+      },
+      {
+        "type": "TEXT",
+        "name": "pageSize",
+        "displayName": "Results page size (number of products)",
+        "simpleValueType": true,
+        "defaultValue": 60,
+        "enablingConditions": [
+          {
+            "paramName": "widget",
+            "paramValue": "results",
+            "type": "EQUALS"
+          }
+        ],
+        "valueValidators": [
+          {
+            "type": "POSITIVE_NUMBER"
+          },
+          {
+            "type": "PERCENTAGE"
+          }
+        ]
+      },
+      {
+        "type": "SELECT",
+        "name": "desktopMode",
+        "displayName": "Menu location on desktop",
+        "selectItems": [
+          {
+            "value": "left",
+            "displayValue": "Sidebar on the left"
+          },
+          {
+            "value": "top",
+            "displayValue": "Above products"
+          }
+        ],
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "widget",
+            "paramValue": "results",
+            "type": "EQUALS"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "type": "TEXT",
     "name": "locale",
     "displayName": "Site locale",
@@ -608,69 +690,6 @@ ___TEMPLATE_PARAMETERS___
           }
         ],
         "defaultValue": 99999
-      },
-      {
-        "type": "TEXT",
-        "name": "queryParameterName",
-        "displayName": "URL parameter containing the query",
-        "simpleValueType": true,
-        "valueValidators": [
-          {
-            "type": "NON_EMPTY"
-          }
-        ],
-        "enablingConditions": [
-          {
-            "paramName": "widget",
-            "paramValue": "results",
-            "type": "EQUALS"
-          }
-        ]
-      },
-      {
-        "type": "TEXT",
-        "name": "pageSize",
-        "displayName": "Results page size (number of products)",
-        "simpleValueType": true,
-        "defaultValue": 60,
-        "enablingConditions": [
-          {
-            "paramName": "widget",
-            "paramValue": "results",
-            "type": "EQUALS"
-          }
-        ],
-        "valueValidators": [
-          {
-            "type": "POSITIVE_NUMBER"
-          },
-          {
-            "type": "PERCENTAGE"
-          }
-        ]
-      },
-      {
-        "type": "SELECT",
-        "name": "desktopMode",
-        "displayName": "Menu location on desktop",
-        "selectItems": [
-          {
-            "value": "left",
-            "displayValue": "Sidebar on the left"
-          },
-          {
-            "value": "top",
-            "displayValue": "Above products"
-          }
-        ],
-        "simpleValueType": true,
-        "enablingConditions": [
-          {
-            "paramName": "widget",
-            "paramValue": "results",
-            "type": "EQUALS"
-          }
-        ]
       }
     ]
   },
@@ -911,28 +930,6 @@ ___TEMPLATE_PARAMETERS___
   },
   {
     "type": "GROUP",
-    "name": "submitHandling",
-    "displayName": "Input submit handling",
-    "groupStyle": "ZIPPY_CLOSED",
-    "subParams": [
-      {
-        "type": "TEXT",
-        "name": "inputSubmitUrl",
-        "displayName": "URL to redirect when pressing Enter in the widget input",
-        "simpleValueType": true,
-        "help": "You can use the placeholder {QUERY} and {QUERY_ENCODED} to pass the entered query."
-      }
-    ],
-    "enablingConditions": [
-      {
-        "paramName": "widget",
-        "paramValue": "dropdown",
-        "type": "EQUALS"
-      }
-    ]
-  },
-  {
-    "type": "GROUP",
     "name": "additionalContent",
     "displayName": "Additional content",
     "groupStyle": "ZIPPY_CLOSED",
@@ -1075,13 +1072,6 @@ const initWidget = () => {
 };
 
 const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
-  let inputSubmit;
-  if (data.inputSubmitUrl) {
-    inputSubmit = (query) => {
-      return data.inputSubmitUrl.replace('{QUERY}', encodeUri(query));
-    };
-  }
-  
   callInWindow(
     data.mode === "production" ? "RaventicSearchDropdown.create" : "RaventicSearchDropdownDevel.create",
     data.dropdownTargetElementSelector,
@@ -1108,7 +1098,9 @@ const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
 
       zIndex: data.zIndex,
 
-      inputSubmit: inputSubmit,
+      submitUrl: data.inputSubmitUrl,
+      queryParameterName: data.queryParameterName,
+
       inputPlaceholder: data.inputPlaceholder,
 
       demoQueries: data.demoQueries.length > 0 ? data.demoQueries : undefined,
@@ -1174,7 +1166,7 @@ const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
     undefined,
     (event) => {
       raventicLayerPush(event);
-    }    
+    }
   );
 
   data.gtmOnSuccess();

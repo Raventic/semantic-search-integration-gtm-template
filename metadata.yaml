@@ -1,6 +1,8 @@
 homepage: "https://www.raventic.com"
 documentation: "https://doc.raventic.dev/semantic-search/"
 versions:
+    - sha: e4bc9ac279626e7020c64fdcba0423c8b972ee37
+      changeNotes: Widget title when no query is active
     - sha: 322e58d3ead3807aef94a7c502780be6405a064e
       changeNotes: Widget type in AB test event
     - sha: b4e444df59ad858392d88b2c6ea558d3d201201a

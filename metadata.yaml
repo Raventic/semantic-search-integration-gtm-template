@@ -1,6 +1,8 @@
 homepage: "https://www.raventic.com"
 documentation: "https://doc.raventic.dev/semantic-search/"
 versions:
+    - sha: 322e58d3ead3807aef94a7c502780be6405a064e
+      changeNotes: Widget type in AB test event
     - sha: b4e444df59ad858392d88b2c6ea558d3d201201a
       changeNotes: Changed configuration of dropdown input submit, separate "functional" configuration group
     - sha: e3169f0267cf47b10487aa169b61d5c3a8ff688a

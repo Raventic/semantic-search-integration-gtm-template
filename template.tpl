@@ -1046,7 +1046,7 @@ const makeString = require('makeString');
 const makeTableMap = require('makeTableMap');
 const encodeUri = require('encodeUri');
 
-const version = "20250328001";
+const version = "20250328018";
 
 const initWidget = () => {
   const dataLayerPush = createQueue('dataLayer');
@@ -1185,6 +1185,22 @@ const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
     undefined,
     (event) => {
       raventicLayerPush(event);
+    },
+    undefined,
+    (type, item, instanceId) => {
+      dataLayerPush({
+        event: "RaventicSearchDropdownWidgetContentClick",
+        raventic: {
+          search: {
+            instanceId: instanceId,
+            clickedContent: {
+              type: type,
+              ident: item.id,
+              title: item.title
+            }
+          },
+        },
+      });
     }
   );
 

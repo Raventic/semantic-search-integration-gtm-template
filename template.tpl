@@ -133,6 +133,18 @@ ___TEMPLATE_PARAMETERS___
     ]
   },
   {
+    "type": "TEXT",
+    "name": "locale",
+    "displayName": "Site locale",
+    "simpleValueType": true,
+    "valueValidators": [
+      {
+        "type": "NON_EMPTY"
+      }
+    ],
+    "help": "Your site locale (en-US, cs-CZ, etc.). Used to correctly format prices and decimal numbers. You will receive this value from Raventic."
+  },
+  {
     "type": "GROUP",
     "name": "functional",
     "displayName": "Functional configuration",
@@ -213,18 +225,6 @@ ___TEMPLATE_PARAMETERS___
         ]
       }
     ]
-  },
-  {
-    "type": "TEXT",
-    "name": "locale",
-    "displayName": "Site locale",
-    "simpleValueType": true,
-    "valueValidators": [
-      {
-        "type": "NON_EMPTY"
-      }
-    ],
-    "help": "Your site locale (en-US, cs-CZ, etc.). Used to correctly format prices and decimal numbers. You will receive this value from Raventic."
   },
   {
     "type": "GROUP",

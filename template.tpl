@@ -91,6 +91,30 @@ ___TEMPLATE_PARAMETERS___
     ]
   },
   {
+    "type": "CHECKBOX",
+    "name": "csp",
+    "checkboxText": "The site uses Content Security Policy directives",
+    "simpleValueType": true
+  },
+  {
+    "type": "TEXT",
+    "name": "cspNonce",
+    "displayName": "CSP nonce value",
+    "simpleValueType": true,
+    "enablingConditions": [
+      {
+        "paramName": "csp",
+        "paramValue": true,
+        "type": "EQUALS"
+      }
+    ],
+    "valueValidators": [
+      {
+        "type": "NON_EMPTY"
+      }
+    ]
+  },
+  {
     "type": "TEXT",
     "name": "dropdownTargetElementSelector",
     "displayName": "Target element selector",
@@ -1046,7 +1070,7 @@ const makeString = require('makeString');
 const makeTableMap = require('makeTableMap');
 const encodeUri = require('encodeUri');
 
-const version = "20250328018";
+const version = "20250430001";
 
 const initWidget = () => {
   const dataLayerPush = createQueue('dataLayer');
@@ -1142,7 +1166,9 @@ const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
       
       cartConfig: cartConfig(),
       
-      showAllMessage: data.showAllMessage
+      showAllMessage: data.showAllMessage,
+      
+      cspNonce: data.cspNonce ? data.cspNonce : undefined,
     },
     (instanceId) => {
       dataLayerPush({
@@ -1254,7 +1280,9 @@ const initResultsWidget = (dataLayerPush, raventicLayerPush) => {
       filterButtonTitle: data.filterButtonTitle,
       clearAllFiltersTitle: data.clearAllFiltersTitle,
 
-      cartConfig: cartConfig()
+      cartConfig: cartConfig(),
+      
+      cspNonce: data.cspNonce ? data.cspNonce : undefined,
     },
     (instanceId) => {
       dataLayerPush({

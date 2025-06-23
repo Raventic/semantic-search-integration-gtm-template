@@ -1023,6 +1023,56 @@ ___TEMPLATE_PARAMETERS___
             "isUnique": false
           }
         ]
+      },
+      {
+        "type": "PARAM_TABLE",
+        "name": "additionalContentItemsInitial",
+        "displayName": "Initial content to be displayed before the user starts typing a query",
+        "paramTableColumns": [
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "type",
+              "displayName": "Type",
+              "simpleValueType": true,
+              "valueValidators": [
+                {
+                  "type": "NON_EMPTY"
+                }
+              ],
+              "help": "Must match one of types in Content types list (table above)"
+            },
+            "isUnique": false
+          },
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "title",
+              "displayName": "Link title",
+              "simpleValueType": true,
+              "valueValidators": [
+                {
+                  "type": "NON_EMPTY"
+                }
+              ]
+            },
+            "isUnique": false
+          },
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "url",
+              "displayName": "Link URL",
+              "simpleValueType": true,
+              "valueValidators": [
+                {
+                  "type": "NON_EMPTY"
+                }
+              ]
+            },
+            "isUnique": false
+          }
+        ]
       }
     ],
     "enablingConditions": [
@@ -1070,7 +1120,7 @@ const makeString = require('makeString');
 const makeTableMap = require('makeTableMap');
 const encodeUri = require('encodeUri');
 
-const version = "20250430001";
+const version = "202506230001";
 
 const initWidget = () => {
   const dataLayerPush = createQueue('dataLayer');
@@ -1115,6 +1165,24 @@ const initWidget = () => {
 };
 
 const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
+  const additionalContent = [];
+  
+  for (let contentType of data.additionalContentItems) {
+    const items = [];
+  
+    for (let item of data.additionalContentItemsInitial) {
+      if (item.type === contentType.type) {
+        items.push({
+          title: item.title,
+          url: item.url,
+        });
+      }
+    }
+    
+    contentType.initialItems = items;
+    additionalContent.push(contentType);
+  }
+    
   callInWindow(
     data.mode === "production" ? "RaventicSearchDropdown.create" : "RaventicSearchDropdownDevel.create",
     data.dropdownTargetElementSelector,
@@ -1162,7 +1230,7 @@ const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
       
       recommendedPhrasesTitle: data.recommendedPhrasesTitle ? data.recommendedPhrasesTitle : undefined,
       
-      content: data.additionalContentItems,
+      content: additionalContent,
       
       cartConfig: cartConfig(),
       

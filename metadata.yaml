@@ -1,6 +1,8 @@
 homepage: "https://www.raventic.com"
 documentation: "https://doc.raventic.dev/semantic-search/"
 versions:
+    - sha: e299464954390b1a59ceca95792ad1d789740924
+      changeNotes: Additional content in dropdown widget can have initial values/items
     - sha: 84b394c836b3d5626dc985fa5f8000ebec0d2675
       changeNotes: CSP nonce support
     - sha: e4bc9ac279626e7020c64fdcba0423c8b972ee37

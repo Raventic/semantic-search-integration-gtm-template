@@ -1167,10 +1167,10 @@ const initWidget = () => {
 const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
   const additionalContent = [];
   
-  for (let contentType of data.additionalContentItems) {
+  for (let contentType of (data.additionalContentItems ? data.additionalContentItems : [])) {
     const items = [];
   
-    for (let item of data.additionalContentItemsInitial) {
+    for (let item of (data.additionalContentItemsInitial ? data.additionalContentItemsInitial: [])) {
       if (item.type === contentType.type) {
         items.push({
           title: item.title,

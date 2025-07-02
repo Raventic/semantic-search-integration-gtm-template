@@ -1,6 +1,8 @@
 homepage: "https://www.raventic.com"
 documentation: "https://doc.raventic.dev/semantic-search/"
 versions:
+    - sha: d809b015bfa0f945e3ef190828e438eee7a15220
+      changeNotes: Version 2 of widgets - more flexible product cards, unified product card classes across widgets, option to keep image background
     - sha: 8950540f99c52c2640788e4dc35f9faa50148f4b
       changeNotes: Fix for empty additional contents & initial additional contents in dropdown
     - sha: e299464954390b1a59ceca95792ad1d789740924

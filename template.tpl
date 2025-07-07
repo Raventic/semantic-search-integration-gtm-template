@@ -1270,6 +1270,47 @@ ___TEMPLATE_PARAMETERS___
           }
         ],
         "defaultValue": 99999
+      },
+      {
+        "type": "TEXT",
+        "name": "resultsCount",
+        "displayName": "Number of results to load",
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "widget",
+            "paramValue": "dropdown",
+            "type": "EQUALS"
+          }
+        ],
+        "valueValidators": [
+          {
+            "type": "POSITIVE_NUMBER"
+          }
+        ],
+        "defaultValue": 10
+      },
+      {
+        "type": "TEXT",
+        "name": "breakpoints",
+        "displayName": "Breakpoints (px)",
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "widget",
+            "paramValue": "dropdown",
+            "type": "EQUALS"
+          }
+        ],
+        "valueValidators": [
+          {
+            "type": "REGEX",
+            "args": [
+              "(\\d+,)*\\d+"
+            ]
+          }
+        ],
+        "defaultValue": "640,768,1024,1280,1536"
       }
     ]
   },
@@ -1439,6 +1480,9 @@ const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
       
       tableParameters: data.tableParameters ? data.tableParameters : undefined,
       individualParameters: data.individualParameters ? data.individualParameters : undefined,
+      
+      resultsCount: data.resultsCount ? makeInteger(data.resultsCount) : undefined,
+      breakpoints: data.breakpoints ? data.breakpoints.split(',').map((x) => makeInteger(x.trim())) : undefined,
     },
     (instanceId) => {
       dataLayerPush({

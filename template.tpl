@@ -1478,7 +1478,18 @@ const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
     (stage, error, instanceId) => {
       logToConsole("Raventic Semantic Search Dropdown Widget error:", stage, error);
     },
-    undefined,
+    (results, _, instanceId) => {
+      dataLayerPush({
+        event: "RaventicSearchDropdownWidgetSearch",
+        raventic: {
+          search: {
+            instanceId: instanceId,
+            queries: results.queries,
+            results: results.products.length,            
+          },
+        },
+      });
+    },
     (event) => {
       raventicLayerPush(event);
     },
@@ -1604,7 +1615,18 @@ const initResultsWidget = (dataLayerPush, raventicLayerPush) => {
     (stage, error, instanceId) => {
       logToConsole("Raventic Semantic Search Results Widget error:", stage, error);
     },
-    undefined,
+    (results, _, instanceId) => {
+      dataLayerPush({
+        event: "RaventicSearchResultsWidgetSearch",
+        raventic: {
+          search: {
+            instanceId: instanceId,
+            queries: results.queries,
+            results: results.totalCount,            
+          },
+        },
+      });
+    },
     (event) => {
       raventicLayerPush(event);
     }    

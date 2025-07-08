@@ -1,6 +1,8 @@
 homepage: "https://www.raventic.com"
 documentation: "https://doc.raventic.dev/semantic-search/"
 versions:
+    - sha: bec854b3b30b9b85a8531c9a309b2abefc76cff1
+      changeNotes: Configurable product price/sale price parameter names
     - sha: 8a82885d87f95fb16d5fc3b89ba64b1d841278f1
       changeNotes: Configurable dropdown results and breakpoints, dropdown/results widget results fire a GTM event
     - sha: d809b015bfa0f945e3ef190828e438eee7a15220

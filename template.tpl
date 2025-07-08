@@ -38,7 +38,7 @@ ___TEMPLATE_PARAMETERS___
     "type": "SELECT",
     "name": "version",
     "displayName": "Widget version",
-    "macrosInSelect": true,
+    "macrosInSelect": false,
     "selectItems": [
       {
         "value": "v1",

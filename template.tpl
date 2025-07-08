@@ -292,6 +292,38 @@ ___TEMPLATE_PARAMETERS___
             "type": "NON_NEGATIVE_NUMBER"
           }
         ]
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "customPriceParameters",
+        "checkboxText": "Set custom product price parameter names",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "priceParameterName",
+        "displayName": "Product price parameter name",
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "customPriceParameters",
+            "paramValue": true,
+            "type": "EQUALS"
+          }
+        ]
+      },
+      {
+        "type": "TEXT",
+        "name": "salePriceParameterName",
+        "displayName": "Product sale price parameter name",
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "customPriceParameters",
+            "paramValue": true,
+            "type": "EQUALS"
+          }
+        ]
       }
     ]
   },
@@ -1483,6 +1515,9 @@ const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
       
       resultsCount: data.resultsCount ? makeInteger(data.resultsCount) : undefined,
       breakpoints: data.breakpoints ? data.breakpoints.split(',').map((x) => makeInteger(x.trim())) : undefined,
+      
+      priceParameterName: data.priceParameterName ? data.priceParameterName : undefined,
+      salePriceParameterName: data.salePriceParameterName ? data.salePriceParameterName : undefined,
     },
     (instanceId) => {
       dataLayerPush({
@@ -1620,6 +1655,9 @@ const initResultsWidget = (dataLayerPush, raventicLayerPush) => {
       
       tableParameters: data.tableParameters ? data.tableParameters : undefined,
       individualParameters: data.individualParameters ? data.individualParameters : undefined,
+      
+      priceParameterName: data.priceParameterName ? data.priceParameterName : undefined,
+      salePriceParameterName: data.salePriceParameterName ? data.salePriceParameterName : undefined,
     },
     (instanceId) => {
       dataLayerPush({

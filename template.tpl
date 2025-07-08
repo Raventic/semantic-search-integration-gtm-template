@@ -1383,7 +1383,7 @@ const makeString = require('makeString');
 const makeTableMap = require('makeTableMap');
 const encodeUri = require('encodeUri');
 
-const version = "202506230001";
+const version = "20250708001";
 
 const initWidget = () => {
   const dataLayerPush = createQueue('dataLayer');

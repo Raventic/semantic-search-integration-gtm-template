@@ -1,6 +1,8 @@
 homepage: "https://www.raventic.com"
 documentation: "https://doc.raventic.dev/semantic-search/"
 versions:
+    - sha: 821757d7a6bcb74e1c0d954e42de988874738a70
+      changeNotes: SDK v3 support, enable background scrolling on mobile breakpoints
     - sha: bec854b3b30b9b85a8531c9a309b2abefc76cff1
       changeNotes: Configurable product price/sale price parameter names
     - sha: 8a82885d87f95fb16d5fc3b89ba64b1d841278f1

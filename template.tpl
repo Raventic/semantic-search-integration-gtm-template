@@ -47,6 +47,10 @@ ___TEMPLATE_PARAMETERS___
       {
         "value": "v2",
         "displayValue": "V2"
+      },
+      {
+        "value": "v3",
+        "displayValue": "V3"
       }
     ],
     "simpleValueType": true,
@@ -1518,6 +1522,8 @@ const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
       
       priceParameterName: data.priceParameterName ? data.priceParameterName : undefined,
       salePriceParameterName: data.salePriceParameterName ? data.salePriceParameterName : undefined,
+      
+      disableAnalyticsIntegration: true,
     },
     (instanceId) => {
       dataLayerPush({
@@ -1658,6 +1664,8 @@ const initResultsWidget = (dataLayerPush, raventicLayerPush) => {
       
       priceParameterName: data.priceParameterName ? data.priceParameterName : undefined,
       salePriceParameterName: data.salePriceParameterName ? data.salePriceParameterName : undefined,
+      
+      disableAnalyticsIntegration: true,
     },
     (instanceId) => {
       dataLayerPush({

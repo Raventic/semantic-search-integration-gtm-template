@@ -1347,6 +1347,19 @@ ___TEMPLATE_PARAMETERS___
           }
         ],
         "defaultValue": "640,768,1024,1280,1536"
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "disableMobileBreakpointBodyClass",
+        "checkboxText": "Enable page scrolling in background on mobile breakpoints",
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "widget",
+            "paramValue": "dropdown",
+            "type": "EQUALS"
+          }
+        ]
       }
     ]
   },
@@ -1524,6 +1537,8 @@ const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
       salePriceParameterName: data.salePriceParameterName ? data.salePriceParameterName : undefined,
       
       disableAnalyticsIntegration: true,
+      
+      mobileBreakpointBodyClass: !data.disableMobileBreakpointBodyClass ? undefined : false,
     },
     (instanceId) => {
       dataLayerPush({

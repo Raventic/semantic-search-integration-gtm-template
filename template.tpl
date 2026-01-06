@@ -51,6 +51,10 @@ ___TEMPLATE_PARAMETERS___
       {
         "value": "v3",
         "displayValue": "V3"
+      },
+      {
+        "value": "v4",
+        "displayValue": "V4"
       }
     ],
     "simpleValueType": true,
@@ -494,7 +498,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "TEXT",
         "name": "titlePattern",
-        "displayName": "Title of the results widget. Use placeholder {QUERY} to use the input query.",
+        "displayName": "Title of the results widget. For v1-v3 use placeholder {QUERY} to use the input query. For v4 the query is appended to the title (no pattern supported).",
         "simpleValueType": true,
         "enablingConditions": [
           {
@@ -698,7 +702,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "SELECT",
         "name": "labelsPosition",
-        "displayName": "Labels position in product card",
+        "displayName": "Default labels position in product card",
         "macrosInSelect": true,
         "selectItems": [
           {
@@ -720,6 +724,39 @@ ___TEMPLATE_PARAMETERS___
         ],
         "simpleValueType": true,
         "defaultValue": "top-left"
+      },
+      {
+        "type": "SELECT",
+        "name": "customLabelsPosition",
+        "displayName": "Custom labels position in product card",
+        "macrosInSelect": true,
+        "selectItems": [
+          {
+            "value": "top-left",
+            "displayValue": "Top left"
+          },
+          {
+            "value": "top-right",
+            "displayValue": "Top right"
+          },
+          {
+            "value": "bottom-right",
+            "displayValue": "Bottom right"
+          },
+          {
+            "value": "bottom-left",
+            "displayValue": "Bottom left"
+          }
+        ],
+        "simpleValueType": true,
+        "defaultValue": "top-left",
+        "enablingConditions": [
+          {
+            "paramName": "version",
+            "paramValue": "v4",
+            "type": "EQUALS"
+          }
+        ]
       },
       {
         "type": "TEXT",
@@ -1520,6 +1557,7 @@ const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
       cspNonce: data.cspNonce ? data.cspNonce : undefined,
       
       labelsPosition: data.labelsPosition ? data.labelsPosition : undefined,
+      customLabelsPosition: data.customLabelsPosition ? data.customLabelsPosition : undefined,
       
       customLabelParameters: data.customLabelParameters && !!data.customLabelParameters.length ? data.customLabelParameters : undefined,
       
@@ -1667,6 +1705,7 @@ const initResultsWidget = (dataLayerPush, raventicLayerPush) => {
       cspNonce: data.cspNonce ? data.cspNonce : undefined,
       
       labelsPosition: data.labelsPosition ? data.labelsPosition : undefined,
+      customLabelsPosition: data.customLabelsPosition ? data.customLabelsPosition : undefined,
       
       customLabelParameters: data.customLabelParameters && !!data.customLabelParameters.length ? data.customLabelParameters : undefined,
       

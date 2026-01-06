@@ -1,6 +1,8 @@
 homepage: "https://www.raventic.com"
 documentation: "https://doc.raventic.dev/semantic-search/"
 versions:
+    - sha: e94b7d00df156a52e2eea153ac83384b1280aab3
+      changeNotes: Cart button label fix
     - sha: 6df8177619fc118c7444a65007d10fea62755bc7
       changeNotes: SDK v4 support, additional configuration
     - sha: 821757d7a6bcb74e1c0d954e42de988874738a70

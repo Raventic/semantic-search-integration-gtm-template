@@ -1551,6 +1551,7 @@ const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
       content: additionalContent,
       
       cartConfig: cartConfig(),
+      defaultButtonLabel: data.cartLabel ? data.cartLabel : undefined,
       
       showAllMessage: data.showAllMessage,
       
@@ -1701,6 +1702,7 @@ const initResultsWidget = (dataLayerPush, raventicLayerPush) => {
       clearAllFiltersTitle: data.clearAllFiltersTitle,
 
       cartConfig: cartConfig(),
+      defaultButtonLabel: data.cartLabel ? data.cartLabel : undefined,
       
       cspNonce: data.cspNonce ? data.cspNonce : undefined,
       

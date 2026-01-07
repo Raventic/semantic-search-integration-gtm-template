@@ -793,6 +793,19 @@ ___TEMPLATE_PARAMETERS___
         "simpleValueType": true
       },
       {
+        "type": "CHECKBOX",
+        "name": "defaultButtonToDetail",
+        "checkboxText": "Button leads to detail",
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "version",
+            "paramValue": "v4",
+            "type": "EQUALS"
+          }
+        ]
+      },
+      {
         "type": "GROUP",
         "name": "cart",
         "displayName": "Cart support",
@@ -835,19 +848,6 @@ ___TEMPLATE_PARAMETERS___
             ],
             "simpleValueType": true,
             "enablingConditions": []
-          },
-          {
-            "type": "TEXT",
-            "name": "cartLabel",
-            "displayName": "\"Add to cart\" button text",
-            "simpleValueType": true,
-            "enablingConditions": [
-              {
-                "paramName": "cartType",
-                "paramValue": "none",
-                "type": "NOT_EQUALS"
-              }
-            ]
           },
           {
             "type": "TEXT",
@@ -964,6 +964,24 @@ ___TEMPLATE_PARAMETERS___
                 "type": "EQUALS"
               }
             ]
+          }
+        ]
+      },
+      {
+        "type": "TEXT",
+        "name": "cartLabel",
+        "displayName": "Button text",
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "cartType",
+            "paramValue": "none",
+            "type": "NOT_EQUALS"
+          },
+          {
+            "paramName": "defaultButtonToDetail",
+            "paramValue": true,
+            "type": "EQUALS"
           }
         ]
       }
@@ -1552,6 +1570,7 @@ const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
       
       cartConfig: cartConfig(),
       defaultButtonLabel: data.cartLabel ? data.cartLabel : undefined,
+      defaultButtonToDetail: data.defaultButtonToDetail ? data.defaultButtonToDetail : undefined,
       
       showAllMessage: data.showAllMessage,
       
@@ -1703,6 +1722,7 @@ const initResultsWidget = (dataLayerPush, raventicLayerPush) => {
 
       cartConfig: cartConfig(),
       defaultButtonLabel: data.cartLabel ? data.cartLabel : undefined,
+      defaultButtonToDetail: data.defaultButtonToDetail ? data.defaultButtonToDetail : undefined,
       
       cspNonce: data.cspNonce ? data.cspNonce : undefined,
       

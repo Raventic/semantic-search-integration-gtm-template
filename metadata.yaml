@@ -1,6 +1,8 @@
 homepage: "https://www.raventic.com"
 documentation: "https://doc.raventic.dev/semantic-search/"
 versions:
+    - sha: 4060d12c1ff8eacb0b92fad2456bfe6c58739b5b
+      changeNotes: Possibility to open product detail on a single result in dropdown widget
     - sha: 2688149ff906edf8d7ed04ab831bac4db348fd6f
       changeNotes: Product card button can lead to product detail by default
     - sha: e94b7d00df156a52e2eea153ac83384b1280aab3

@@ -1704,6 +1704,7 @@ const initResultsWidget = (dataLayerPush, raventicLayerPush) => {
       desktopMode: data.desktopMode,
 
       titlePattern: data.titlePattern,
+      title: data.titlePattern,
       noQueryTitle: data.noQueryTitle,
 
       noResultsFoundMessage: data.noResultsFoundMessage ? data.noResultsFoundMessage : undefined,

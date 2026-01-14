@@ -275,6 +275,19 @@ ___TEMPLATE_PARAMETERS___
             "type": "EQUALS"
           }
         ]
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "submitToDetailOnSingleResult",
+        "checkboxText": "When submitting query, open product detail if there is only a single result",
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "widget",
+            "paramValue": "dropdown",
+            "type": "EQUALS"
+          }
+        ]
       }
     ]
   },
@@ -1597,6 +1610,8 @@ const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
       disableAnalyticsIntegration: true,
       
       mobileBreakpointBodyClass: !data.disableMobileBreakpointBodyClass ? undefined : false,
+      
+      submitToDetailOnSingleResult: !!data.submitToDetailOnSingleResult,
     },
     (instanceId) => {
       dataLayerPush({

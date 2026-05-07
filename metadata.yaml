@@ -1,6 +1,8 @@
 homepage: "https://www.raventic.com"
 documentation: "https://doc.raventic.dev/semantic-search/"
 versions:
+    - sha: d663c3c22abcc1ace2c040ea5d1f9adf74271a07
+      changeNotes: Additional and promo content, promo filters
     - sha: ecbfa822b6576866b90dce50fb92955e1d050881
       changeNotes: A/B testing improvements
     - sha: 4060d12c1ff8eacb0b92fad2456bfe6c58739b5b

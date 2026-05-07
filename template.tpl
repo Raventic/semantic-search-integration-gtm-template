@@ -1659,6 +1659,20 @@ ___TEMPLATE_PARAMETERS___
         "alwaysInSummary": true
       }
     ]
+  },
+  {
+    "type": "GROUP",
+    "name": "debug",
+    "displayName": "Debug tools",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "CHECKBOX",
+        "name": "dumpConfig",
+        "checkboxText": "Dump widget configurations into console",
+        "simpleValueType": true
+      }
+    ]
   }
 ]
 
@@ -1677,6 +1691,7 @@ const generateRandom = require('generateRandom');
 const makeString = require('makeString');
 const makeTableMap = require('makeTableMap');
 const encodeUri = require('encodeUri');
+const JSON = require('JSON');
 
 const version = "20250708001";
 
@@ -1750,89 +1765,95 @@ const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
     contentType.initialItems = items;
     additionalContent.push(contentType);
   }
+  
+  const config = {
+    apiKey: data.apiKey,
+    bestsellersApiKey: data.displayBestsellers && data.bestsellersApiKey ? data.bestsellersApiKey : undefined,
+
+    locale: data.locale,
+
+    currency: data.currency,
+    priceDecimals: data.priceDecimals !== undefined ? makeInteger(data.priceDecimals) : undefined,
+
+    displayInStock: !!data.displayInStock,
+    inStockText: data.inStockText,
+
+    disableDefaultStyles: !!data.disableDefaultStyles,
+    customStyles: data.customStyles ? data.customStyles : undefined,
+    customPageStyles: data.customPageStyles ? data.customPageStyles : undefined,
+
+    thumbnailDimensions: data.thumbnailCustomSize && data.thumbnailWidth && data.thumbnailHeight ? {
+      width: makeInteger(data.thumbnailWidth),
+      height: makeInteger(data.thumbnailHeight),
+    } : undefined,
+    doNotCropImages: data.doNotCropImages ? data.doNotCropImages : undefined,
+
+    zIndex: data.zIndex,
+
+    submitUrl: data.inputSubmitUrl,
+    queryParameterName: data.queryParameterName,
+
+    inputPlaceholder: data.inputPlaceholder,
+
+    demoQueries: data.demoQueries.length > 0 ? data.demoQueries : undefined,
+
+    welcomeMessage: data.welcomeMessage,
+
+    searchingForMessage: data.searchingForMessage ? data.searchingForMessage : undefined,
+    wouldYouLikeToSearchForMessage: data.wouldYouLikeToSearchForMessage ? data.wouldYouLikeToSearchForMessage : undefined,
+
+    recommendedProductsTitle: data.recommendedProductsTitle,
+
+    foundProductsTitle: data.foundProductsTitle,
+    foundProductsTitleShort: data.foundProductsTitleShort ? data.foundProductsTitleShort : undefined,
+
+    noResultsFoundMessage: data.noResultsFoundMessage ? data.noResultsFoundMessage : undefined,
+
+    recommendedPhrasesTitle: data.recommendedPhrasesTitle ? data.recommendedPhrasesTitle : undefined,
+
+    content: additionalContent,
+
+    cartConfig: cartConfig(),
+    defaultButtonLabel: data.cartLabel ? data.cartLabel : undefined,
+    defaultButtonToDetail: data.defaultButtonToDetail ? data.defaultButtonToDetail : undefined,
+
+    showAllMessage: data.showAllMessage,
+
+    cspNonce: data.cspNonce ? data.cspNonce : undefined,
+
+    labelsPosition: data.labelsPosition ? data.labelsPosition : undefined,
+    customLabelsPosition: data.customLabelsPosition ? data.customLabelsPosition : undefined,
+
+    customLabelParameters: data.customLabelParameters && !!data.customLabelParameters.length ? data.customLabelParameters : undefined,
+
+    buttonTypeParameterName: data.buttonTypeParameterName ? data.buttonTypeParameterName : undefined,
+    buttonLabelParameterName: data.buttonLabelParameterName ? data.buttonLabelParameterName : undefined,
+    buttonStyleParameterName: data.buttonStyleParameterName ? data.buttonStyleParameterName : undefined,
+
+    tableParameters: data.tableParameters ? data.tableParameters : undefined,
+    individualParameters: data.individualParameters ? data.individualParameters : undefined,
+
+    resultsCount: data.resultsCount ? makeInteger(data.resultsCount) : undefined,
+    breakpoints: data.breakpoints ? data.breakpoints.split(',').map((x) => makeInteger(x.trim())) : undefined,
+
+    priceParameterName: data.priceParameterName ? data.priceParameterName : undefined,
+    salePriceParameterName: data.salePriceParameterName ? data.salePriceParameterName : undefined,
+
+    disableAnalyticsIntegration: true,
+
+    mobileBreakpointBodyClass: !data.disableMobileBreakpointBodyClass ? undefined : false,
+
+    submitToDetailOnSingleResult: !!data.submitToDetailOnSingleResult,
+  };
+  
+  if (data.dumpConfig) {
+    logToConsole("Raventic Semantic Search Dropdown Widget config:", JSON.stringify(config));
+  }
     
   callInWindow(
     data.mode === "production" ? "RaventicSearchDropdown.create" : "RaventicSearchDropdownDevel.create",
     data.dropdownTargetElementSelector,
-    {
-      apiKey: data.apiKey,
-      bestsellersApiKey: data.displayBestsellers && data.bestsellersApiKey ? data.bestsellersApiKey : undefined,
-
-      locale: data.locale,
-
-      currency: data.currency,
-      priceDecimals: data.priceDecimals !== undefined ? makeInteger(data.priceDecimals) : undefined,
-
-      displayInStock: !!data.displayInStock,
-      inStockText: data.inStockText,
-
-      disableDefaultStyles: !!data.disableDefaultStyles,
-      customStyles: data.customStyles ? data.customStyles : undefined,
-      customPageStyles: data.customPageStyles ? data.customPageStyles : undefined,
-
-      thumbnailDimensions: data.thumbnailCustomSize && data.thumbnailWidth && data.thumbnailHeight ? {
-        width: makeInteger(data.thumbnailWidth),
-        height: makeInteger(data.thumbnailHeight),
-      } : undefined,
-      doNotCropImages: data.doNotCropImages ? data.doNotCropImages : undefined,
-
-      zIndex: data.zIndex,
-
-      submitUrl: data.inputSubmitUrl,
-      queryParameterName: data.queryParameterName,
-
-      inputPlaceholder: data.inputPlaceholder,
-
-      demoQueries: data.demoQueries.length > 0 ? data.demoQueries : undefined,
-
-      welcomeMessage: data.welcomeMessage,
-
-      searchingForMessage: data.searchingForMessage ? data.searchingForMessage : undefined,
-      wouldYouLikeToSearchForMessage: data.wouldYouLikeToSearchForMessage ? data.wouldYouLikeToSearchForMessage : undefined,
-
-      recommendedProductsTitle: data.recommendedProductsTitle,
-
-      foundProductsTitle: data.foundProductsTitle,
-      foundProductsTitleShort: data.foundProductsTitleShort ? data.foundProductsTitleShort : undefined,
-
-      noResultsFoundMessage: data.noResultsFoundMessage ? data.noResultsFoundMessage : undefined,
-      
-      recommendedPhrasesTitle: data.recommendedPhrasesTitle ? data.recommendedPhrasesTitle : undefined,
-      
-      content: additionalContent,
-      
-      cartConfig: cartConfig(),
-      defaultButtonLabel: data.cartLabel ? data.cartLabel : undefined,
-      defaultButtonToDetail: data.defaultButtonToDetail ? data.defaultButtonToDetail : undefined,
-      
-      showAllMessage: data.showAllMessage,
-      
-      cspNonce: data.cspNonce ? data.cspNonce : undefined,
-      
-      labelsPosition: data.labelsPosition ? data.labelsPosition : undefined,
-      customLabelsPosition: data.customLabelsPosition ? data.customLabelsPosition : undefined,
-      
-      customLabelParameters: data.customLabelParameters && !!data.customLabelParameters.length ? data.customLabelParameters : undefined,
-      
-      buttonTypeParameterName: data.buttonTypeParameterName ? data.buttonTypeParameterName : undefined,
-      buttonLabelParameterName: data.buttonLabelParameterName ? data.buttonLabelParameterName : undefined,
-      buttonStyleParameterName: data.buttonStyleParameterName ? data.buttonStyleParameterName : undefined,
-      
-      tableParameters: data.tableParameters ? data.tableParameters : undefined,
-      individualParameters: data.individualParameters ? data.individualParameters : undefined,
-      
-      resultsCount: data.resultsCount ? makeInteger(data.resultsCount) : undefined,
-      breakpoints: data.breakpoints ? data.breakpoints.split(',').map((x) => makeInteger(x.trim())) : undefined,
-      
-      priceParameterName: data.priceParameterName ? data.priceParameterName : undefined,
-      salePriceParameterName: data.salePriceParameterName ? data.salePriceParameterName : undefined,
-      
-      disableAnalyticsIntegration: true,
-      
-      mobileBreakpointBodyClass: !data.disableMobileBreakpointBodyClass ? undefined : false,
-      
-      submitToDetailOnSingleResult: !!data.submitToDetailOnSingleResult,
-    },
+    config,
     (instanceId) => {
       dataLayerPush({
         event: "RaventicSearchDropdownWidgetOpen",
@@ -1908,84 +1929,90 @@ const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
 };
 
 const initResultsWidget = (dataLayerPush, raventicLayerPush) => {
+  const config = {
+    apiKey: data.apiKey,
+
+    locale: data.locale,
+
+    currency: data.currency,
+    priceDecimals: data.priceDecimals !== undefined ? makeInteger(data.priceDecimals) : undefined,
+
+    displayInStock: !!data.displayInStock,
+    inStockText: data.inStockText,
+
+    disableDefaultStyles: !!data.disableDefaultStyles,
+    customStyles: data.customStyles ? data.customStyles : undefined,
+    customPageStyles: data.customPageStyles ? data.customPageStyles : undefined,
+
+    thumbnailDimensions: data.thumbnailCustomSize && data.thumbnailWidth && data.thumbnailHeight ? {
+      width: makeInteger(data.thumbnailWidth),
+      height: makeInteger(data.thumbnailHeight),
+    } : undefined,
+    doNotCropImages: data.doNotCropImages ? data.doNotCropImages : undefined,
+
+    queryParameterName: data.queryParameterName,
+
+    pageSize: data.pageSize,
+
+    desktopMode: data.desktopMode,
+
+    titlePattern: data.titlePattern,
+    title: data.titlePattern,
+    noQueryTitle: data.noQueryTitle,
+
+    noResultsFoundMessage: data.noResultsFoundMessage ? data.noResultsFoundMessage : undefined,
+
+    categoriesTitle: data.categoriesTitle,
+
+    showManufacturers: !!data.showManufacturers,
+    manufacturersTitle: data.showManufacturers && data.manufacturersTitle ? data.manufacturersTitle : undefined,
+
+    priceTitle: data.priceTitle,
+
+    filtersTitle: data.filtersTitle,
+
+    filterButtonTitle: data.filterButtonTitle,
+    clearAllFiltersTitle: data.clearAllFiltersTitle,
+
+    cartConfig: cartConfig(),
+    defaultButtonLabel: data.cartLabel ? data.cartLabel : undefined,
+    defaultButtonToDetail: data.defaultButtonToDetail ? data.defaultButtonToDetail : undefined,
+
+    cspNonce: data.cspNonce ? data.cspNonce : undefined,
+
+    labelsPosition: data.labelsPosition ? data.labelsPosition : undefined,
+    customLabelsPosition: data.customLabelsPosition ? data.customLabelsPosition : undefined,
+
+    customLabelParameters: data.customLabelParameters && !!data.customLabelParameters.length ? data.customLabelParameters : undefined,
+
+    buttonTypeParameterName: data.buttonTypeParameterName ? data.buttonTypeParameterName : undefined,
+    buttonLabelParameterName: data.buttonLabelParameterName ? data.buttonLabelParameterName : undefined,
+    buttonStyleParameterName: data.buttonStyleParameterName ? data.buttonStyleParameterName : undefined,
+
+    tableParameters: data.tableParameters ? data.tableParameters : undefined,
+    individualParameters: data.individualParameters ? data.individualParameters : undefined,
+
+    priceParameterName: data.priceParameterName ? data.priceParameterName : undefined,
+    salePriceParameterName: data.salePriceParameterName ? data.salePriceParameterName : undefined,
+
+    disableAnalyticsIntegration: true,
+
+    additionalContent: data.additionalContentResultsItems,
+    promoContent: data.promoContentResultsItems,
+    promoFilters: data.promoFiltersResultsItems,
+
+    productsTitle: data.productsTitle ? data.productsTitle : undefined,
+    readMoreTitle: data.readMoreTitle ? data.readMoreTitle : undefined
+  };
+  
+  if (data.dumpConfig) {
+    logToConsole("Raventic Semantic Search Results Widget config:", JSON.stringify(config));
+  }
+  
   callInWindow(
     data.mode === "production" ? "RaventicSearchResults.create" : "RaventicSearchResultsDevel.create",
     data.resultsTargetElementSelector,
-    {
-      apiKey: data.apiKey,
-      
-      locale: data.locale,
-
-      currency: data.currency,
-      priceDecimals: data.priceDecimals !== undefined ? makeInteger(data.priceDecimals) : undefined,
-
-      displayInStock: !!data.displayInStock,
-      inStockText: data.inStockText,
-
-      disableDefaultStyles: !!data.disableDefaultStyles,
-      customStyles: data.customStyles ? data.customStyles : undefined,
-      customPageStyles: data.customPageStyles ? data.customPageStyles : undefined,
-
-      thumbnailDimensions: data.thumbnailCustomSize && data.thumbnailWidth && data.thumbnailHeight ? {
-        width: makeInteger(data.thumbnailWidth),
-        height: makeInteger(data.thumbnailHeight),
-      } : undefined,
-      doNotCropImages: data.doNotCropImages ? data.doNotCropImages : undefined,
-
-      queryParameterName: data.queryParameterName,
-
-      pageSize: data.pageSize,
-
-      desktopMode: data.desktopMode,
-
-      titlePattern: data.titlePattern,
-      title: data.titlePattern,
-      noQueryTitle: data.noQueryTitle,
-
-      noResultsFoundMessage: data.noResultsFoundMessage ? data.noResultsFoundMessage : undefined,
-
-      categoriesTitle: data.categoriesTitle,
-
-      showManufacturers: !!data.showManufacturers,
-      manufacturersTitle: data.showManufacturers && data.manufacturersTitle ? data.manufacturersTitle : undefined,
-
-      priceTitle: data.priceTitle,
-
-      filtersTitle: data.filtersTitle,
-
-      filterButtonTitle: data.filterButtonTitle,
-      clearAllFiltersTitle: data.clearAllFiltersTitle,
-
-      cartConfig: cartConfig(),
-      defaultButtonLabel: data.cartLabel ? data.cartLabel : undefined,
-      defaultButtonToDetail: data.defaultButtonToDetail ? data.defaultButtonToDetail : undefined,
-      
-      cspNonce: data.cspNonce ? data.cspNonce : undefined,
-      
-      labelsPosition: data.labelsPosition ? data.labelsPosition : undefined,
-      customLabelsPosition: data.customLabelsPosition ? data.customLabelsPosition : undefined,
-      
-      customLabelParameters: data.customLabelParameters && !!data.customLabelParameters.length ? data.customLabelParameters : undefined,
-      
-      buttonTypeParameterName: data.buttonTypeParameterName ? data.buttonTypeParameterName : undefined,
-      buttonLabelParameterName: data.buttonLabelParameterName ? data.buttonLabelParameterName : undefined,
-      buttonStyleParameterName: data.buttonStyleParameterName ? data.buttonStyleParameterName : undefined,
-      
-      tableParameters: data.tableParameters ? data.tableParameters : undefined,
-      individualParameters: data.individualParameters ? data.individualParameters : undefined,
-      
-      priceParameterName: data.priceParameterName ? data.priceParameterName : undefined,
-      salePriceParameterName: data.salePriceParameterName ? data.salePriceParameterName : undefined,
-      
-      disableAnalyticsIntegration: true,
-      
-      additionalContent: data.additionalContentResultsItems,
-      promoContent: data.promoContentResultsItems,
-      promoFilters: data.promoFiltersResultsItems,
-      
-      productsTitle: data.productsTitle ? data.productsTitle : undefined,
-      readMoreTitle: data.readMoreTitle ? data.readMoreTitle : undefined
-    },
+    config,
     (instanceId) => {
       dataLayerPush({
         event: "RaventicSearchResultsWidgetOpen",

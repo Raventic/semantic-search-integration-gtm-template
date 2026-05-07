@@ -1158,13 +1158,13 @@ ___TEMPLATE_PARAMETERS___
   },
   {
     "type": "GROUP",
-    "name": "additionalContent",
+    "name": "additionalContentDropdown",
     "displayName": "Additional content",
     "groupStyle": "ZIPPY_CLOSED",
     "subParams": [
       {
         "type": "PARAM_TABLE",
-        "name": "additionalContentItems",
+        "name": "additionalContentDropdownItems",
         "displayName": "Content types list",
         "paramTableColumns": [
           {
@@ -1212,7 +1212,7 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "PARAM_TABLE",
-        "name": "additionalContentItemsInitial",
+        "name": "additionalContentDropdownItemsInitial",
         "displayName": "Initial content to be displayed before the user starts typing a query",
         "paramTableColumns": [
           {
@@ -1265,6 +1265,215 @@ ___TEMPLATE_PARAMETERS___
       {
         "paramName": "widget",
         "paramValue": "dropdown",
+        "type": "EQUALS"
+      }
+    ]
+  },
+  {
+    "type": "GROUP",
+    "name": "additionalContentResults",
+    "displayName": "Additional content",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "CHECKBOX",
+        "name": "additionalContentResultsEnable",
+        "checkboxText": "Show additional contents",
+        "simpleValueType": true
+      },
+      {
+        "type": "PARAM_TABLE",
+        "name": "additionalContentResultsItems",
+        "displayName": "Additional content",
+        "paramTableColumns": [
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "identifier",
+              "displayName": "Type",
+              "simpleValueType": true,
+              "valueValidators": [
+                {
+                  "type": "NON_EMPTY"
+                }
+              ],
+              "help": "Value will be provided by Raventic"
+            },
+            "isUnique": true
+          },
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "title",
+              "displayName": "Title",
+              "simpleValueType": true,
+              "valueValidators": [
+                {
+                  "type": "NON_EMPTY"
+                }
+              ]
+            },
+            "isUnique": false
+          },
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "maxCount",
+              "displayName": "Page size",
+              "simpleValueType": true,
+              "valueValidators": [],
+              "defaultValue": 5
+            },
+            "isUnique": false
+          }
+        ],
+        "enablingConditions": [
+          {
+            "paramName": "additionalContentResultsEnable",
+            "paramValue": true,
+            "type": "EQUALS"
+          }
+        ]
+      },
+      {
+        "type": "TEXT",
+        "name": "productsTitle",
+        "displayName": "Title of the Produts tab",
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "additionalContentResultsEnable",
+            "paramValue": true,
+            "type": "EQUALS"
+          }
+        ]
+      },
+      {
+        "type": "TEXT",
+        "name": "readMoreTitle",
+        "displayName": "\"Read more\" label on additional content cards",
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "additionalContentResultsEnable",
+            "paramValue": true,
+            "type": "EQUALS"
+          }
+        ]
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "promoContentResultsEnable",
+        "checkboxText": "Show promo contents",
+        "simpleValueType": true
+      },
+      {
+        "type": "PARAM_TABLE",
+        "name": "promoContentResultsItems",
+        "displayName": "Promo content",
+        "paramTableColumns": [
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "identifier",
+              "displayName": "Type",
+              "simpleValueType": true,
+              "valueValidators": [
+                {
+                  "type": "NON_EMPTY"
+                }
+              ],
+              "help": "Value will be provided by Raventic"
+            },
+            "isUnique": true
+          },
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "title",
+              "displayName": "Title",
+              "simpleValueType": true,
+              "valueValidators": [
+                {
+                  "type": "NON_EMPTY"
+                }
+              ]
+            },
+            "isUnique": false
+          },
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "maxCount",
+              "displayName": "Number of results",
+              "simpleValueType": true,
+              "valueValidators": [],
+              "defaultValue": 5,
+              "help": "Maximum number of results to display"
+            },
+            "isUnique": false
+          }
+        ],
+        "enablingConditions": [
+          {
+            "paramName": "promoContentResultsEnable",
+            "paramValue": true,
+            "type": "EQUALS"
+          }
+        ]
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "promoFiltersResultsEnable",
+        "checkboxText": "Show promo filters",
+        "simpleValueType": true
+      },
+      {
+        "type": "PARAM_TABLE",
+        "name": "promoFiltersResultsItems",
+        "displayName": "Promo filters",
+        "paramTableColumns": [
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "parameter",
+              "displayName": "Type",
+              "simpleValueType": true,
+              "valueValidators": [
+                {
+                  "type": "NON_EMPTY"
+                }
+              ],
+              "help": "Value will be provided by Raventic"
+            },
+            "isUnique": true
+          },
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "maxCount",
+              "displayName": "Number of results",
+              "simpleValueType": true,
+              "valueValidators": [],
+              "defaultValue": 5,
+              "help": "Maximum number of results to display"
+            },
+            "isUnique": false
+          }
+        ],
+        "enablingConditions": [
+          {
+            "paramName": "promoFiltersResultsEnable",
+            "paramValue": true,
+            "type": "EQUALS"
+          }
+        ]
+      }
+    ],
+    "enablingConditions": [
+      {
+        "paramName": "widget",
+        "paramValue": "results",
         "type": "EQUALS"
       }
     ]
@@ -1526,10 +1735,10 @@ const initWidget = () => {
 const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
   const additionalContent = [];
   
-  for (let contentType of (data.additionalContentItems ? data.additionalContentItems : [])) {
+  for (let contentType of (data.additionalContentDropdownItems ? data.additionalContentDropdownItems : [])) {
     const items = [];
   
-    for (let item of (data.additionalContentItemsInitial ? data.additionalContentItemsInitial: [])) {
+    for (let item of (data.additionalContentDropdownItemsInitial ? data.additionalContentDropdownItemsInitial: [])) {
       if (item.type === contentType.type) {
         items.push({
           title: item.title,
@@ -1769,6 +1978,13 @@ const initResultsWidget = (dataLayerPush, raventicLayerPush) => {
       salePriceParameterName: data.salePriceParameterName ? data.salePriceParameterName : undefined,
       
       disableAnalyticsIntegration: true,
+      
+      additionalContent: data.additionalContentResultsItems,
+      promoContent: data.promoContentResultsItems,
+      promoFilters: data.promoFiltersResultsItems,
+      
+      productsTitle: data.productsTitle ? data.productsTitle : undefined,
+      readMoreTitle: data.readMoreTitle ? data.readMoreTitle : undefined
     },
     (instanceId) => {
       dataLayerPush({

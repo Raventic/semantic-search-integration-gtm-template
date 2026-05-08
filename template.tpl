@@ -1158,13 +1158,13 @@ ___TEMPLATE_PARAMETERS___
   },
   {
     "type": "GROUP",
-    "name": "additionalContentDropdown",
+    "name": "additionalContent",
     "displayName": "Additional content",
     "groupStyle": "ZIPPY_CLOSED",
     "subParams": [
       {
         "type": "PARAM_TABLE",
-        "name": "additionalContentDropdownItems",
+        "name": "additionalContentItems",
         "displayName": "Content types list",
         "paramTableColumns": [
           {
@@ -1212,7 +1212,7 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "PARAM_TABLE",
-        "name": "additionalContentDropdownItemsInitial",
+        "name": "additionalContentItemsInitial",
         "displayName": "Initial content to be displayed before the user starts typing a query",
         "paramTableColumns": [
           {
@@ -1750,10 +1750,10 @@ const initWidget = () => {
 const initDropdownWidget = (dataLayerPush, raventicLayerPush) => {
   const additionalContent = [];
   
-  for (let contentType of (data.additionalContentDropdownItems ? data.additionalContentDropdownItems : [])) {
+  for (let contentType of (data.additionalContentItems ? data.additionalContentItems : [])) {
     const items = [];
   
-    for (let item of (data.additionalContentDropdownItemsInitial ? data.additionalContentDropdownItemsInitial: [])) {
+    for (let item of (data.additionalContentItemsInitial ? data.additionalContentItemsInitial: [])) {
       if (item.type === contentType.type) {
         items.push({
           title: item.title,
